@@ -7,6 +7,7 @@
 
 	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
 		<!--<jar-file>${entities.jar.location}</jar-file> -->
+		 <class>com.vmgs.entity.Contact</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.transaction.flush_before_completion"
