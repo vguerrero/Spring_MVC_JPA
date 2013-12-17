@@ -10,7 +10,15 @@
 <title>Spring 3 MVC Series - Contact Manager</title>
 </head>
 <body>
-	<h2>Contact Manager</h2>
+	<h3><spring:message code="label.title"/></h3>
+ 
+<span style="float: right">
+    <a href="?lang=en">en</a> 
+    | 
+    <a href="?lang=de">de</a>
+	| 
+    <a href="?lang=es">es</a>
+</span>
 
 	<form:form method="post" action="/contact/add" commandName="contact">
 
@@ -55,7 +63,7 @@
 	</form:form>
 
 
-	<h3>Contacts</h3>
+	<h3><spring:message code="label.list"/></h3>
 	<c:if test="${!empty contactList}">
 		<table class="data">
 			<tr>
