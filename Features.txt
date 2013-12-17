@@ -1,0 +1,9 @@
+Features:
+Spring MVC
+JPA-Hibernate
+Internacionalizacion y Localizacion
+Tiles
+Themes
+JPA Enhancement (Query DSL, categorias para contact)
+Spring Security
+
