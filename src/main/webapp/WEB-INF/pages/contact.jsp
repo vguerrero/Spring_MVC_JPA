@@ -19,8 +19,8 @@
 	| 
     <a href="?lang=es">es</a>
 </span>
-
-	<form:form method="post" action="/contact/add" commandName="contact">
+	<spring:url var="addUrl" value="/contact/add"/>
+	<form:form method="post" action="${addUrl}"  commandName="contact">
 
 		<table>
 			<tr>
