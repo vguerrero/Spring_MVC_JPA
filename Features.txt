@@ -2,6 +2,7 @@ Features:
 Spring MVC
 JPA-Hibernate
 Internacionalizacion y Localizacion
+Form Validation
 Tiles
 Themes
 Maven Profiles (DBs)
