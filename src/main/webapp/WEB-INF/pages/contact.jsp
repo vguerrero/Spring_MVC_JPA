@@ -15,8 +15,6 @@
 <span style="float: right">
     <a href="?lang=en">en</a> 
     | 
-    <a href="?lang=de">de</a>
-	| 
     <a href="?lang=es">es</a>
 </span>
 	<spring:url var="addUrl" value="/contact/add"/>
@@ -30,6 +28,7 @@
 				</td>
 				<td><form:input path="firstname" />
 				</td>
+				<td><form:errors path="firstname" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td><form:label path="lastname">
@@ -38,6 +37,7 @@
 				</td>
 				<td><form:input path="lastname" />
 				</td>
+				<td><form:errors path="lastname" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td><form:label path="email">

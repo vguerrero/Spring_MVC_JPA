@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 @Table(name = "contact")
@@ -16,15 +20,19 @@ public class Contact {
 	private Integer id;
 
 	@Column(name = "FIRSTNAME")
+	@Size(min=2, max=30) 
 	private String firstname;
 
 	@Column(name = "LASTNAME")
+	@NotEmpty
 	private String lastname;
 
 	@Column(name = "EMAIL")
+	//@NotEmpty @Email
 	private String email;
 
 	@Column(name = "TELEPHONE")
+	//@Size(min=10) 
 	private String telephone;
 
 	public String getEmail() {

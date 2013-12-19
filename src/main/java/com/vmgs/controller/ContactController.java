@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.vmgs.entity.Contact;
 import com.vmgs.service.ContactService;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/contact")
@@ -30,11 +31,20 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("contact") Contact contact,
-			BindingResult result) {
+	public String addContact(@Valid Contact contact,  BindingResult result) {
+		System.out.println( "addContact method!" );
+		if(result.hasErrors()) {
+			System.out.println( "Error de Validacion!" );
+			return "contact";
+		}
 
 		contactService.addContact(contact);
 
+		return "redirect:/contact/index";
+	}
+	
+	@RequestMapping("/add")
+	public String gotoIndex(){
 		return "redirect:/contact/index";
 	}
 
