@@ -6,8 +6,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+<style type="text/css">
+    .error { color: red ; font-size: 0.9em; font-weight: bold; }
+	.errorblock{ width:20%;	color: #000;	background-color: #ffEEEE;	border: 3px solid #ff0000;
+					padding:8px;	margin:16px;}
+	
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Spring 3 MVC Series - Contact Manager</title>
+<title>Spring 3 MVC Series - <spring:message code="label.title" /></title>
+
 </head>
 <body>
 	<h3><spring:message code="label.title"/></h3>
@@ -17,9 +24,13 @@
     | 
     <a href="?lang=es">es</a>
 </span>
+	<!--URLS Definidas -->
 	<spring:url var="addUrl" value="/contact/add"/>
+	<spring:url var="deleteUrl" value="/contact/delete"/>
+	
+	
 	<form:form method="post" action="${addUrl}"  commandName="contact">
-
+		<form:errors path="*" cssClass="errorblock" element="div"/>
 		<table>
 			<tr>
 				<td><form:label path="firstname">
@@ -28,7 +39,7 @@
 				</td>
 				<td><form:input path="firstname" />
 				</td>
-				<td><form:errors path="firstname" cssclass="error"></form:errors></td>
+				<td class="error"><form:errors path="firstname" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td><form:label path="lastname">
@@ -37,7 +48,7 @@
 				</td>
 				<td><form:input path="lastname" />
 				</td>
-				<td><form:errors path="lastname" cssclass="error"></form:errors></td>
+				<td class="error"><form:errors path="lastname" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td><form:label path="email">
@@ -46,6 +57,7 @@
 				</td>
 				<td><form:input path="email" />
 				</td>
+				<td class="error"><form:errors path="email" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td><form:label path="telephone">
@@ -54,6 +66,7 @@
 				</td>
 				<td><form:input path="telephone" />
 				</td>
+				<td class="error"><form:errors path="telephone" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit"
@@ -63,13 +76,14 @@
 	</form:form>
 
 
-	<h3><spring:message code="label.list"/></h3>
+	
 	<c:if test="${!empty contactList}">
+	<h3><spring:message code="label.list"/></h3>
 		<table class="data">
 			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Telephone</th>
+				<th><spring:message code="label.completename"/></th>
+				<th><spring:message code="label.email"/></th>
+				<th><spring:message code="label.telephone"/></th>
 				<th>&nbsp;</th>
 			</tr>
 			<c:forEach items="${contactList}" var="contact">
@@ -77,7 +91,7 @@
 					<td>${contact.lastname}, ${contact.firstname}</td>
 					<td>${contact.email}</td>
 					<td>${contact.telephone}</td>
-					<td><a href="/contact/delete/${contact.id}">delete</a>
+					<td><a href="${deleteUrl}/${contact.id}">delete</a>
 					</td>
 				</tr>
 			</c:forEach>

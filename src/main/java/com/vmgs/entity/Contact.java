@@ -24,15 +24,16 @@ public class Contact {
 	private String firstname;
 
 	@Column(name = "LASTNAME")
-	@NotEmpty
+	@Size(min=2, max=30) 
 	private String lastname;
 
 	@Column(name = "EMAIL")
-	//@NotEmpty @Email
+	@Email
+	@NotEmpty
 	private String email;
 
 	@Column(name = "TELEPHONE")
-	//@Size(min=10) 
+	@NotEmpty	
 	private String telephone;
 
 	public String getEmail() {

@@ -1,6 +1,7 @@
 package com.vmgs.controller;
 
 import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,20 @@ public class ContactController {
 
 	@Autowired
 	private ContactService contactService;
+	
+	private List<Contact> contactList;
+	
+	/*@ModelAttribute es en Spring MVC la forma de enlazar el modelo a la vista */
+	@ModelAttribute("contactList") 
+	public List<Contact> getcontactList(){
+		return contactService.listContact();
+	}
 
 	@RequestMapping("/index")
 	public String listContacts(Map<String, Object> map) {
 
 		map.put("contact", new Contact());
-		map.put("contactList", contactService.listContact());
+		//map.put("contactList", contactService.listContact()); 
 
 		return "contact";
 	}
