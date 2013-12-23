@@ -38,9 +38,10 @@ public class ContactController {
 
 		return "contact";
 	}
-
+	
+	//here @ModelAttribute("contact") es opcional funciona si lo quitamos tambien
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addContact(@Valid Contact contact,  BindingResult result) {
+	public String addContact(@Valid @ModelAttribute("contact") Contact contact,  BindingResult result) {
 		System.out.println( "addContact method!" );
 		if(result.hasErrors()) {
 			System.out.println( "Error de Validacion!" );
