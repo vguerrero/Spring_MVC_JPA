@@ -8,12 +8,13 @@
 <head>
 <style type="text/css">
     .error { color: red ; font-size: 0.9em; font-weight: bold; }
-	.errorblock{ width:20%;	color: #000;	background-color: #ffEEEE;	border: 3px solid #ff0000;
+	.errorblock{ width:80%;	color: #000;	background-color: #ffEEEE;	border: 3px solid #ff0000;
 					padding:8px;	margin:16px;}
 	
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Spring 3 MVC Series - <spring:message code="label.title" /></title>
+
+<!-- <title>Spring 3 MVC Series - <spring:message code="label.title" /></title> -->
 
 </head>
 <body>
