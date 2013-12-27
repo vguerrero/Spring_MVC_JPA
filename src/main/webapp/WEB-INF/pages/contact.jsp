@@ -18,13 +18,6 @@
 
 </head>
 <body>
-	<h3><spring:message code="label.title"/></h3>
- 
-<span style="float: right">
-    <a href="?lang=en">en</a> 
-    | 
-    <a href="?lang=es">es</a>
-</span>
 	<!--URLS Definidas -->
 	<spring:url var="addUrl" value="/contact/add"/>
 	<spring:url var="deleteUrl" value="/contact/delete"/>

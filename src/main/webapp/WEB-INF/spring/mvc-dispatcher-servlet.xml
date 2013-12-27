@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	
-	<!-- el bean que resuelve las vistas que se mostraran -->
+	<!-- el bean que resuelve las vistas que se mostraran en este caso tiles -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass">
@@ -48,12 +48,7 @@
 		<property name="defaultLocale" value="en" />
 	</bean>
 
-	<bean id="handlerMapping"
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="interceptors">
-			<ref bean="localeChangeInterceptor" />
-		</property>
-	</bean>
+	
 	
 	<!-- Loa archivos de mensajes -->
 	<bean id="messageSource"
@@ -62,5 +57,32 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 	
+	<!-- soporte de temas -->
+	<bean id="themeSource"
+    class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+        <property name="basenamePrefix" value="theme-" />
+	</bean>
+	 
+	<!-- Theme Change Interceptor and Resolver definition -->
+	<bean id="themeChangeInterceptor"
+		class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+		<property name="paramName" value="theme" />
+	</bean>
+	
+	<bean id="themeResolver"
+		class="org.springframework.web.servlet.theme.CookieThemeResolver">
+		<property name="defaultThemeName" value="default" />
+	</bean>
+	 
+	 
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor" />
+				<ref bean="themeChangeInterceptor" />
+			</list>
+		</property>
+	</bean>
 
 </beans>

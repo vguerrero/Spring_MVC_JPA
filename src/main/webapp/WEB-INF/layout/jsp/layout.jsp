@@ -8,11 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<!-- el title es uno solo para toda la app y no cambia por page -->
-<c:set var="titleKey"><tiles:getAsString name="titleKey"/></c:set>
-<title><spring:message code="label.title"></spring:message> </title>
-
 <!-- <title><tiles:insertAttribute name="title" ignore="true" /></title> -->
+<link rel="stylesheet"  href='<spring:theme code="css"/>' type="text/css">
+
+<!-- el title es uno solo para toda la app y no cambia por page -->
+<title><spring:message code="label.title"></spring:message> </title>
 </head>
 <body>
 <table border="1" cellpadding="2" cellspacing="2" align="center" width="100%">

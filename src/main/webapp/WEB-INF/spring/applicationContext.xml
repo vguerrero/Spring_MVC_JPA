@@ -24,13 +24,18 @@
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
-	<!--<mvc:annotaion-driven /> overrides LocaleChangeInterceptor defined in your XML config. Fuente: http://stackoverflow.com/questions/9400806/springs-localization-doesnt-switch-languages -->
+	<!--esta configuracion <mvc:annotaion-driven /> afecta los interceptores que definimos anteriormente en mvc-dispatcher-servlet
+	aki,	defined in your XML config. Fuente: http://stackoverflow.com/questions/9400806/springs-localization-doesnt-switch-languages -->
 	<mvc:interceptors>
+		<!--Localizacion -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <property name="paramName" value="lang" />
+        <property name="paramName" value="lang" /></bean>
+		
+		<!-- Theme Change Interceptor and Resolver definition -->
+		<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+			<property name="paramName" value="theme" />
 		</bean>
 	</mvc:interceptors>
-
 
 	<import resource="db.xml" />
 </beans>
