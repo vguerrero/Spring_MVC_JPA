@@ -7,13 +7,9 @@
 
 	<persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
 		<!--<jar-file>${entities.jar.location}</jar-file> -->
-		 <class>com.vmgs.entity.Contact</class>
-		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.transaction.flush_before_completion"
-				value="true" />
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
-		</properties>
+		<!-- <class>com.vmgs.entity.Contact</class> -->
+		<provider>org.hibernate.ejb.HibernatePersistence</provider> 
+		
 	</persistence-unit>
 	
 </persistence>

@@ -36,6 +36,47 @@
 			<property name="paramName" value="theme" />
 		</bean>
 	</mvc:interceptors>
+	
+	<!-- Esta es la configuracion de la base de datos ///////////////////////////////////////////////////////////////////////////////////////-->
+		<!-- Define all property files here. Values will be available in all other 
+			spring config files. -->
+		<bean id="placeholderConfig"
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:db.properties</value>
+				</list>
+			</property>
+		</bean>
+		
+		<!--for our production database, do not set hibernate.hbm2ddl.auto - the default is to make no database changes. Instead, we manually create an SQL DDL update script that applies changes from one version to the next. -->
+		<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" name="EntityManagerFactory">
+			<property name="persistenceUnitName" value="default"></property>
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="jpaProperties">
+				<props>
+					<prop key="hibernate.dialect">${db.dialect}</prop>
+					<prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
+					<prop key="hibernate.hbm2ddl.import_files">${hbm2ddl.import_files}</prop>
+				</props>
+			</property>
+		
+		</bean>
 
-	<import resource="db.xml" />
+		<!-- Values are defined in db.properties -->
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+			<property name="driverClassName" value="${db.driver}" />
+			<property name="url" value="${db.url}" />
+			<property name="username" value="${db.username}" />
+			<property name="password" value="${db.password}" />
+		</bean>
+
+		<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" name="TransactionManager">
+			<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+		</bean>
+
+		<tx:annotation-driven />
+
+		<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </beans>
