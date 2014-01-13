@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.vmgs.dao.PersonDao;
 import com.vmgs.entity.Person;
 
-
+//prueba
 @Controller
 @RequestMapping("/person")
 public class personController{

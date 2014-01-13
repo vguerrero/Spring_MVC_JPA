@@ -15,6 +15,7 @@
 		<tiles.version>2.2.2</tiles.version>
 		
 		<resource.dir>src/main/resources</resource.dir>
+	
 	</properties>
 
 	<dependencies>
@@ -182,7 +183,7 @@
 		</dependency>
 		        
 		
-		
+	           
             
 	</dependencies>
 	
@@ -196,8 +197,8 @@
 			<db.url>jdbc:hsqldb:mem:app-db</db.url>
 			<db.dialect>org.hibernate.dialect.HSQLDialect</db.dialect>
 			<db.driver>org.hsqldb.jdbcDriver</db.driver>
-			<hbm2ddl.auto>create-drop</hbm2ddl.auto>
-			<hbm2ddl.import_files>/import.sql</hbm2ddl.import_files>
+			<db.auto>create-drop</db.auto>
+			<db.import_files>/import.sql</db.import_files>
 		   </properties>
 		   <activation>
 			<!--<activeByDefault>true</activeByDefault> -->
@@ -206,6 +207,7 @@
 				<value>dev</value>
 			</property>
 		   </activation>
+		  
 		 </profile>
 		 
 		 <profile>
@@ -217,8 +219,8 @@
 			<db.url>jdbc:sqlserver://localhost:1433;databaseName=myDb</db.url>
 			<db.dialect>org.hibernate.dialect.SQLServerDialect</db.dialect>
 			<db.driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</db.driver>
-			<hbm2ddl.auto>update</hbm2ddl.auto>
-			<hbm2ddl.import_files></hbm2ddl.import_files>
+			<db.auto>update</db.auto>
+			<db.import_files></db.import_files>
 		   </properties>
 		   <activation>
 			<property>
@@ -226,43 +228,44 @@
 				<value>prod</value>
 			</property>
 		   </activation>
+		  
 		 </profile>
 		</profiles>
 		
 	<build>
 		<finalName>SpringMVC</finalName>
 		
-		 <resources>
+		<resources>
                 <resource>
                     <directory>${resource.dir}</directory>
                     <filtering>true</filtering>
                 </resource>
-        </resources>
+        </resources> 
 		
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<configuration>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
-					<stopPort>9966</stopPort>
-					<stopKey>foo</stopKey>
-				</configuration>
-
+			 <configuration>
+                                        <scanIntervalSeconds>3</scanIntervalSeconds>
+                                        <stopPort>9966</stopPort>
+                                        <stopKey>foo</stopKey>
+                                </configuration>
 			</plugin>
-			<!--<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 

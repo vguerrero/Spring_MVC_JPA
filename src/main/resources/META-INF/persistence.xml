@@ -9,7 +9,7 @@
 		<!--<jar-file>${entities.jar.location}</jar-file> -->
 		<!-- <class>com.vmgs.entity.Contact</class> -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider> 
-		
+	
 	</persistence-unit>
 	
 </persistence>

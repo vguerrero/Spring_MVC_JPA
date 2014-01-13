@@ -40,24 +40,20 @@
 	<!-- Esta es la configuracion de la base de datos ///////////////////////////////////////////////////////////////////////////////////////-->
 		<!-- Define all property files here. Values will be available in all other 
 			spring config files. -->
-		<bean id="placeholderConfig"
-			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-			<property name="locations">
-				<list>
-					<value>classpath:db.properties</value>
-				</list>
-			</property>
+		<bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		   <property name="locations" value="classpath:db.properties"/>
 		</bean>
 		
 		<!--for our production database, do not set hibernate.hbm2ddl.auto - the default is to make no database changes. Instead, we manually create an SQL DDL update script that applies changes from one version to the next. -->
 		<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" name="EntityManagerFactory">
+			<property name="persistenceXmlLocation" value="classpath:./META-INF/persistence.xml"/>
 			<property name="persistenceUnitName" value="default"></property>
 			<property name="dataSource" ref="dataSource"></property>
 			<property name="jpaProperties">
 				<props>
 					<prop key="hibernate.dialect">${db.dialect}</prop>
-					<prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
-					<prop key="hibernate.hbm2ddl.import_files">${hbm2ddl.import_files}</prop>
+					<prop key="hibernate.hbm2ddl.auto">${db.auto}</prop>
+					<prop key="hibernate.hbm2ddl.import_files">${db.import_files}</prop>
 				</props>
 			</property>
 		
@@ -73,6 +69,7 @@
 
 		<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" name="TransactionManager">
 			<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+			<property name="dataSource" ref="dataSource"/>
 		</bean>
 
 		<tx:annotation-driven />

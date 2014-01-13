@@ -14,16 +14,31 @@ public class ContactServiceImpl implements ContactService {
 
 	@Autowired
 	private ContactDao contactDAO;
+	
+	@Override
+	public Contact getContactById(Integer id){
+		return contactDAO.getContactById(id);
+	}
 
 	@Transactional
 	public void addContact(Contact contact) {
 		contactDAO.addContact(contact);
 
 	}
+	
+	@Transactional
+	public void updateContact(Contact contact) {
+		contactDAO.updateContact(contact);
+	}
 
 	@Override
 	public List<Contact> listContact() {
 		return contactDAO.listContact();
+	}
+	
+	@Override
+	public List<Contact> findALL(){
+		return contactDAO.findALL();
 	}
 
 	@Transactional

@@ -9,11 +9,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
+import com.vmgs.entity.Category;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.FetchType;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Table(name = "contact")
+@NamedQuery(name=Contact.FIND_ALL, query="SELECT p FROM Contact p") //estas consultas estaticas son eficientes
 public class Contact {
+	
+	public static final String FIND_ALL = "Contact.findAll"; 
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +43,10 @@ public class Contact {
 	@Column(name = "TELEPHONE")
 	@NotEmpty	
 	private String telephone;
+	
+	@OneToOne(fetch=FetchType.LAZY) //lectura demorada
+	@JoinColumn(name="Category_FK")
+	private Category category;
 
 	public String getEmail() {
 		return email;
@@ -74,5 +86,13 @@ public class Contact {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }

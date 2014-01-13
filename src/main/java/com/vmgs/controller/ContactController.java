@@ -27,7 +27,7 @@ public class ContactController {
 	/*@ModelAttribute es en Spring MVC la forma de enlazar el modelo a la vista */
 	@ModelAttribute("contactList") 
 	public List<Contact> getcontactList(){
-		return contactService.listContact();
+		return contactService.findALL();//contactService.listContact();
 	}
 
 	@RequestMapping("/index")
