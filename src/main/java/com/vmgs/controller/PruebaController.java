@@ -42,7 +42,8 @@ public class PruebaController {
 					//ahora le creamos una categoria si no existe 
 					categoria = categoryDao.getCategoryByName("Familia");
 					if( categoria == null){
-						categoria = new Category("Familia");
+						categoria = new Category(0, "Amigos");
+						
 						categoryDao.addCategory(categoria);
 						resp="Se agrego la categoria: "+ categoria.getName();
 					}

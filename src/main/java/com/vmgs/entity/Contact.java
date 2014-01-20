@@ -44,7 +44,7 @@ public class Contact {
 	@NotEmpty	
 	private String telephone;
 	
-	@OneToOne(fetch=FetchType.LAZY) //lectura demorada
+	@OneToOne(fetch=FetchType.EAGER) //LAZY lectura demorada // optional=false--> no nulos
 	@JoinColumn(name="Category_FK")
 	private Category category;
 
@@ -95,4 +95,10 @@ public class Contact {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public String toString() {
+		return "Contact [firstname=" + firstname + ", lastname=" + lastname + ", Category= " 
+				+ "]";
+	}
+
 }

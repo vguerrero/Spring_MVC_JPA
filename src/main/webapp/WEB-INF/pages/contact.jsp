@@ -19,19 +19,21 @@
 </head>
 <body>
 	<!--URLS Definidas -->
-	<spring:url var="addUrl" value="/contact/add"/>
+	<spring:url var="addUrl" value="/contact/save"/>
 	<spring:url var="deleteUrl" value="/contact/delete"/>
-	
+	<spring:url var="updateUrl" value="/contact/update"/>
 	
 	<form:form method="post" action="${addUrl}"  commandName="contact">
 		<form:errors path="*" cssClass="errorblock" element="div"/>
-		<table>
+		<table >
 			<tr>
 				<td><form:label path="firstname">
 						<spring:message code="label.firstname" />
 					</form:label>
 				</td>
-				<td><form:input path="firstname" />
+				<td>
+				<form:hidden path="id" />
+				<form:input path="firstname" />
 				</td>
 				<td class="error"><form:errors path="firstname" cssclass="error"></form:errors></td>
 			</tr>
@@ -63,6 +65,16 @@
 				<td class="error"><form:errors path="telephone" cssclass="error"></form:errors></td>
 			</tr>
 			<tr>
+				<td></td>
+				<td>
+				<form:select path="category.id" >
+					<form:option value="0" label="--- Select ---" />
+					 <form:options items="${categoryList}" itemValue="id" itemLabel="name" />
+				</form:select>
+				</td>
+				<td class="error"></td>
+			</tr>
+			<tr>
 				<td colspan="2"><input type="submit"
 					value="<spring:message code="label.addcontact"/>" /></td>
 			</tr>
@@ -73,11 +85,12 @@
 	
 	<c:if test="${!empty contactList}">
 	<h3><spring:message code="label.list"/></h3>
-		<table class="data">
+		<table class="data" cellpadding="3" cellspacing="10">
 			<tr>
 				<th><spring:message code="label.completename"/></th>
 				<th><spring:message code="label.email"/></th>
 				<th><spring:message code="label.telephone"/></th>
+				<th><spring:message code="label.category"/></th>
 				<th>&nbsp;</th>
 			</tr>
 			<c:forEach items="${contactList}" var="contact">
@@ -85,7 +98,10 @@
 					<td>${contact.lastname}, ${contact.firstname}</td>
 					<td>${contact.email}</td>
 					<td>${contact.telephone}</td>
-					<td><a href="${deleteUrl}/${contact.id}">delete</a>
+					<td>${contact.category.name}</td>
+					<td><a href="${deleteUrl}/${contact.id}"><spring:message code="label.delete"/></a>
+					</td>
+					<td><a href="${updateUrl}/${contact.id}"><spring:message code="label.update"/></a>
 					</td>
 				</tr>
 			</c:forEach>
