@@ -71,6 +71,10 @@ public class Contact {
 	public String getLastname() {
 		return lastname;
 	}
+	
+	public String getCompleteName(){
+		return this.firstname + " " + this.lastname;
+	}
 
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;

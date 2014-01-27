@@ -46,5 +46,14 @@ public class ContactServiceImpl implements ContactService {
 		contactDAO.removeContact(id);
 
 	}
-
+	
+	@Override
+	public List<Contact> getContactsByCategory(int categoryId){
+		return contactDAO.getContactsByCategory(categoryId);
+	}
+	
+	@Override
+	public String queryInnerMultipleEntitiesResult(){
+		return contactDAO.queryInnerMultipleEntitiesResult();
+	}
 }

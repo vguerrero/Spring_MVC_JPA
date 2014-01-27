@@ -63,13 +63,25 @@ public class PruebaController {
 				}
 			break;
 			case "test2":
-				categoria = categoryDao.getCategoryByName("Familia");
+				categoria = categoryDao.getCategoryByName("Familia");//implementacion de queryDSL
 				if(categoria != null){
-					resp="se encontro la categoria";
+					resp="se encontro la categoria: ";
+					resp = resp + categoria.toString();
 				}
 				else{ resp="No se encontro";}
 				
 				break;
+			case "QueryDSLJoin":
+				List<Contact> contacts = contactService.getContactsByCategory(2);
+				for (Contact c: contacts){
+					resp += c.toString() + " -- ";
+				}
+			break;
+			
+			case "ReturnMultipleColumns":
+				resp = contactService.queryInnerMultipleEntitiesResult();
+			break;
+			
 			default:
 				System.out.println("se fue por default");
 				break;

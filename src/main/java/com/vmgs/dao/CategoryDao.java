@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.vmgs.entity.Category;
 
+
 public interface CategoryDao {
 	public Category getCategoryById(Integer id);
 
@@ -14,4 +15,6 @@ public interface CategoryDao {
 	public void removeCategory(Integer id);
 	
 	public Category getCategoryByName(String name);
+	
+	
 }

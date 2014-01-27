@@ -16,4 +16,8 @@ public interface ContactDao {
 	public List<Contact> findALL();
 
 	public void removeContact(Integer id);
+	
+	public List<Contact> getContactsByCategory(int categoryId);
+	
+	public String queryInnerMultipleEntitiesResult();
 }
