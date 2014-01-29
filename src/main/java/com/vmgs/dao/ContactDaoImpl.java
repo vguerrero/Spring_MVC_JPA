@@ -1,6 +1,7 @@
 package com.vmgs.dao;
 
 import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -65,6 +66,7 @@ public class ContactDaoImpl implements ContactDao {
 		return contacts;
 	}
 	
+	//Returning multiple columns
 	public String queryInnerMultipleEntitiesResult(){
 		String strresult="";
 		JPAQuery query = new JPAQuery(em);
@@ -79,5 +81,7 @@ public class ContactDaoImpl implements ContactDao {
 		}
 		return strresult;
 	}
-
+	
+	
+	
 }

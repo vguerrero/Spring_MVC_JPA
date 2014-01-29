@@ -56,4 +56,6 @@ public class ContactServiceImpl implements ContactService {
 	public String queryInnerMultipleEntitiesResult(){
 		return contactDAO.queryInnerMultipleEntitiesResult();
 	}
+	
+	
 }

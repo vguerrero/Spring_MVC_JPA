@@ -20,8 +20,26 @@
 <body>
 	
 	
-<h3> ${resultado}</h3>
-	
+<h3> ${resultado}</h3></br>
+<!--<c:if test="${enSession != null}"> -->
+	<p>${usuario}</p>
+	<p>${companyid}</p>
+	<p><b>${modelandviewVar}</b></p>
+<!--</c:if>	-->
+<%=session.getAttribute("usuario")%>
+<%=session.getAttribute("companyid")%>
+<%=session.getAttribute("user")%>
+<table>
+	<c:if test="${ContactInfo != null}">
+		<c:forEach items="${ContactInfo}" var="info">
+			<tr>
+			   <td><c:out value="${info.contactId}" /></td>
+			   <td><c:out value="${info.contactName}" /></td>
+			   <td><c:out value="${info.categoryName}" /></td>
+			</tr>
+		</c:forEach>
+	</c:if>	
+</table>
 	
 	
 

@@ -21,4 +21,6 @@ public interface ContactService {
 	public List<Contact> getContactsByCategory(int categoryId);
 	
 	public String queryInnerMultipleEntitiesResult();
+	
+	
 }

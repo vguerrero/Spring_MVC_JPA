@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.ui.Model;
 import com.vmgs.entity.Contact;
 import com.vmgs.entity.Category;
 import com.vmgs.service.ContactService;
 import com.vmgs.dao.CategoryDao;
 import javax.validation.Valid;
+import java.util.List;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/prueba")
+//@SessionAttributes({"usuario","companyid","modelandviewVar"})//manejo de session spring mvc, con esto todo lo que guardamos en estas variables
+//lo guarda tambien en session
 public class PruebaController {
 
 	@Autowired
@@ -30,12 +35,25 @@ public class PruebaController {
 	
 	private Contact currentContact;
 	
-	
+	static{
+		System.out.println("arranca la prueba");
+	}
 
 	@RequestMapping("/index/{tipoPrueba}")
-	public ModelAndView PuntodeEntradaDePruebas(@PathVariable("tipoPrueba") String tipoPrueba) {
+	public ModelAndView PuntodeEntradaDePruebas(@PathVariable("tipoPrueba") String tipoPrueba, Model model, HttpSession session) {
 		String resp="";
 		Category categoria;	
+		//model.addAttribute("companyid",3658851);
+		//model.addAttribute("usuario","victor guerrero");
+		
+		session.setAttribute("user","testuser");//esta si es la session http, @SessionAttributes no es lo mismo que httpSession
+		//ahora vez a prueba/hello y veraz las variables mostradas
+		
+		//obtener la session
+		if(session.getAttribute("user") != null){
+			String user = session.getAttribute("user").toString();
+			System.out.println("Usuario: "+ user);
+		}
 		switch(tipoPrueba){
 			case "test1":
 				if(categoryDao != null){
@@ -82,11 +100,19 @@ public class PruebaController {
 				resp = contactService.queryInnerMultipleEntitiesResult();
 			break;
 			
+			
 			default:
 				System.out.println("se fue por default");
 				break;
 		}
-		return new ModelAndView("prueba","resultado", resp);
+		ModelAndView response = new ModelAndView();
+		response.addObject("modelandviewVar","variable del ModelAndView");//este addObject se utiliza cuando @SessionAttributes esta ativado
+		//si quieres agregar algo hazlo con addAtribute que lo agrega en requestScope
+		response.addAttribute("usuario","victor guerrero");
+		response.addObject("resultado", resp);
+		response.setViewName("prueba");
+		return response;
+		//return new ModelAndView("prueba","resultado", resp);
 	}
 	
 	//here @ModelAttribute("contact") es opcional funciona si lo quitamos tambien
@@ -103,7 +129,11 @@ public class PruebaController {
 		return "redirect:/contact/index";
 	}
 	
-	
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public String gotoHello(Model model){
+		model.addAttribute("message","spring mvc 3 session test");
+		return "hello";
+	}
 
 	
 }

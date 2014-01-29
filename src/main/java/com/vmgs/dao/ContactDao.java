@@ -20,4 +20,6 @@ public interface ContactDao {
 	public List<Contact> getContactsByCategory(int categoryId);
 	
 	public String queryInnerMultipleEntitiesResult();
+	
+
 }
